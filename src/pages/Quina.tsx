@@ -20,7 +20,7 @@ import axios from "axios";
 import api from '../services/api'
 import { RefresherEventDetail } from '@ionic/core';
 
-const Home: React.FC = () => {
+const Quina: React.FC = () => {
   const [number, setNumber] = useState(0);
   const [jogo,setJogo] = useState();  
   const [jogo2,setJogo2] = useState([]);
@@ -34,23 +34,13 @@ const Home: React.FC = () => {
   const [dados, setDados] = useState(false)
   const sendGetRequest = async () => {
 
-    const response = await axios.get(`https://ganheinaloteria.herokuapp.com/api/megasena`);
+    const response = await axios.get(`https://ganheinaloteria.herokuapp.com/api/quina`);
     let dados = response.data
     
     return dados;
   };
 
-  function doRefresh(event: CustomEvent<RefresherEventDetail>) {
-    sendGetRequest().then(data => {
-      setDezenas(data.dezenas)
-      setConcurso(data.numero)
-      setDataConcurso(data.data);
-      setpremiacao(data.premiacao)
-      setAcumulado(data.valorAcumulado)
-      event.detail.complete();
-      salvarConcursos()
-    })
-  }
+
   const  salvarConcursos =   () => {
     
      for(let i = concurso; i>=(concurso-100);i--){
@@ -66,11 +56,11 @@ const Home: React.FC = () => {
     console.log(api);
     
     setShowLoading(true)
-    setJogo('Mega-sena')
+    setJogo('Quina')
     sendGetRequest().then(data => {
       setDezenas(data.dezenas)
       setConcurso(data.numero)
-      setDataConcurso( data.data);
+      setDataConcurso(data.data);
       setpremiacao(data.premiacao)
       setAcumulado(data.valorAcumulado)
       setDados(true)
@@ -111,9 +101,7 @@ const Home: React.FC = () => {
 
           </IonToolbar>
         </IonHeader>
-        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
-          <IonRefresherContent></IonRefresherContent>
-        </IonRefresher>
+      
         <IonLoading
         isOpen={showLoading}
         onDidDismiss={() => setShowLoading(false)}
@@ -141,8 +129,8 @@ const Home: React.FC = () => {
           }
   </div>    
   {
-   acumulado==='0,00' ? <p> <strong>Número de ganhadores(6 números): </strong> {premiacao.sena.ganhadores} <br/> 
-    <strong>Valor da Premiação: </strong> R$ {premiacao.sena.valorPago} </p> 
+   acumulado==='0,00' ? <p> <strong>Número de ganhadores(6 números): </strong> {premiacao.quina.ganhadores} <br/> 
+    <strong>Valor da Premiação: </strong> R$ {premiacao.quina.valorPago} </p> 
    : <p> <strong>Valor Acumulado:</strong> {acumulado} </p>
   }
         <IonList color="primary">
@@ -154,7 +142,7 @@ const Home: React.FC = () => {
           
             concursos.map(c => {
               //console.log({c});
-              let url = '/concurso/'+c
+              let url = '/concursoQ/'+c
               //console.log({url});
               return (
                
@@ -178,4 +166,4 @@ const Home: React.FC = () => {
   );
 };
 
-export default Home;
+export default Quina;

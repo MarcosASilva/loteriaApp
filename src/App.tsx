@@ -22,14 +22,22 @@ import '@ionic/react/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+import Inicio from './pages/Inicio';
+import Quina from './pages/Quina';
+import ConcursoQuina from './pages/concursoQuina';
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route path="/home" component={Home} exact={true} />
+        <Route path="/megasena" component={Home} exact={true} />
+        <Route path="/quina" component={Quina} exact={true} />
+      
+
+        <Route path="/home" component={Inicio} exact={true} />
         <Route exact path="/" render={() => <Redirect to="/home" />} />
         <Route path='/concurso/:id' component={ConcursoMega} exact={true} />
+        <Route path='/concursoQ/:id' component={ConcursoQuina} exact={true} />
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

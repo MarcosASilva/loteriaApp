@@ -8,7 +8,7 @@ import axios from 'axios'
 interface MegaDetails extends RouteComponentProps<{
   id: string;
 }> { }
-const ConcursoMega: React.FC<MegaDetails> = ({ match }) => {
+const ConcursoQuina: React.FC<MegaDetails> = ({ match }) => {
 
   const [jogo, setJogo] = useState();
   const [jogo2, setJogo2] = useState([]);
@@ -27,7 +27,7 @@ const ConcursoMega: React.FC<MegaDetails> = ({ match }) => {
     React.useEffect(() => {
       setConcurso(match.params.id) 
       setShowLoading(true)
-      setJogo('Mega-sena')
+      setJogo('Quina')
       sendGetRequest(match.params.id).then(data => {
         setDezenas(data.dezenas)
         setDataConcurso(data.data);
@@ -42,22 +42,22 @@ const ConcursoMega: React.FC<MegaDetails> = ({ match }) => {
     }, [])
   const sendGetRequest = async (concursos:string) => {
     console.log(concursos)
-    const response = await axios.get(`https://ganheinaloteria.herokuapp.com/api/megasena/${concursos}`);
+    const response = await axios.get(`https://ganheinaloteria.herokuapp.com/api/quina/${concursos}`);
     let dados = response.data
 
     return dados;
   };
   const definirUrls = () => {
-    prev = '/concurso/' + (+match.params.id - 1)
+    prev = '/concursoQ/' + (+match.params.id - 1)
 
-    next = '/concurso/' + (+match.params.id + 1)
+    next = '/concursoQ/' + (+match.params.id + 1)
   } 
     return (
       <IonPage>
         <IonHeader>
           <IonToolbar>
             <IonButton slot="start" fill='clear'>
-              <IonBackButton defaultHref="/megasena" />
+              <IonBackButton defaultHref="/quina" />
             </IonButton>
             <IonTitle>Concurso {concurso} </IonTitle>
           </IonToolbar>
@@ -87,8 +87,8 @@ const ConcursoMega: React.FC<MegaDetails> = ({ match }) => {
             }
           </div>
           {
-            acumulado === '0,00' ? <p> <strong>Número de ganhadores(6 números): </strong> {premiacao.sena.ganhadores} <br />
-              <strong>Valor da Premiação: </strong> R$ {premiacao.sena.valorPago} </p>
+            acumulado === '0,00' ? <p> <strong>Número de ganhadores(5 números): </strong> {premiacao.quina.ganhadores} <br />
+              <strong>Valor da Premiação: </strong> R$ {premiacao.quina.valorPago} </p>
               : <p> <strong>Valor Acumulado:</strong> {acumulado} </p>
           }
           <div className="btnFooter">
@@ -111,4 +111,4 @@ const ConcursoMega: React.FC<MegaDetails> = ({ match }) => {
     )
 }
   
-  export default ConcursoMega;
+  export default ConcursoQuina;
