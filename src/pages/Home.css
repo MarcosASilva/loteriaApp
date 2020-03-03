@@ -1,13 +1,24 @@
-ion-content ion-toolbar {
+ion-content ion-toolbar ion-list {
   --background: translucent;
 }
 * {
 text-align: center;
 }
+.concursoTitle {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-around;
+}
 .dezenas {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  padding: 10px;
+}
+.btnFooter {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   padding: 10px;
 }
 .dezena {
@@ -16,4 +27,7 @@ text-align: center;
   border-radius: 50%;
   border:1px solid pink;
   padding: 10px;
+}
+.btnInicio {
+  margin-left: 0;
 }

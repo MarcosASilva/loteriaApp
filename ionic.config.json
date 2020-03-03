@@ -1,5 +1,7 @@
 {
   "name": "loteriaApp",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

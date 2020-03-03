@@ -8,12 +8,15 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonLoading
+  IonLoading,
+  IonRefresherContent,
+  IonRefresher
 } from "@ionic/react";
 import React, { useState,useEffect } from "react";
 import ExploreContainer from "../components/ExploreContainer";
 import "./Home.css";
 import axios from "axios";
+import { RefresherEventDetail } from '@ionic/core';
 
 const Home: React.FC = () => {
   const [number, setNumber] = useState(0);
@@ -26,6 +29,7 @@ const Home: React.FC = () => {
   const [dezenas,setDezenas] = useState([])
   const [premiacao,setpremiacao] = useState()
   const [showLoading, setShowLoading] = useState(true);
+  const [dados, setDados] = useState(false)
   const sendGetRequest = async () => {
 
     const response = await axios.get(`https://ganheinaloteria.herokuapp.com/api/megasena`);
@@ -34,7 +38,17 @@ const Home: React.FC = () => {
     return dados;
   };
 
-  
+  function doRefresh(event: CustomEvent<RefresherEventDetail>) {
+    sendGetRequest().then(data => {
+      setDezenas(data.dezenas)
+      setConcurso(data.numero)
+      setDataConcurso(data.data);
+      setpremiacao(data.premiacao)
+      setAcumulado(data.valorAcumulado)
+      event.detail.complete();
+      salvarConcursos()
+    })
+  }
   const  salvarConcursos =   () => {
     
      for(let i = concurso; i>=(concurso-100);i--){
@@ -55,14 +69,11 @@ const Home: React.FC = () => {
       setDataConcurso( data.data);
       setpremiacao(data.premiacao)
       setAcumulado(data.valorAcumulado)
+      setDados(true)
       setShowLoading(false)
+      
       salvarConcursos()
     })
-    sendGetRequest().then(data => {
-      setJogo2(data)
-    })
-      
-      console.log(jogo2);
       
     
 
@@ -87,12 +98,15 @@ const Home: React.FC = () => {
         </IonTitle>
         </IonToolbar>
       </IonHeader>
-      <IonContent>
+      <IonContent className="conteudo">
         <IonHeader collapse="condense">
           <IonToolbar>
 
           </IonToolbar>
         </IonHeader>
+        <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
+          <IonRefresherContent></IonRefresherContent>
+        </IonRefresher>
         <IonLoading
         isOpen={showLoading}
         onDidDismiss={() => setShowLoading(false)}
@@ -150,10 +164,6 @@ const Home: React.FC = () => {
             })
           }
 </IonList>
-<div className="dezenas">
-<IonButton onClick={click}>{number}</IonButton>
-<IonButton onClick={click}>{number}</IonButton>
-</div>
         
        
       </IonContent>
