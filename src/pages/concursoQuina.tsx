@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { RouteComponentProps } from 'react-router-dom';
 import './Home.css'
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonLoading, IonButton, IonIcon, IonButtons, IonBackButton } from '@ionic/react';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonContent, IonLoading, IonButton,  IonBackButton } from '@ionic/react';
 import axios from 'axios'
 
 interface MegaDetails extends RouteComponentProps<{
@@ -11,11 +11,9 @@ interface MegaDetails extends RouteComponentProps<{
 const ConcursoQuina: React.FC<MegaDetails> = ({ match }) => {
 
   const [jogo, setJogo] = useState();
-  const [jogo2, setJogo2] = useState([]);
   const [concurso, setConcurso] = useState();
   const [acumulado, setAcumulado] = useState();
   const [dataConcurso, setDataConcurso] = useState();
-  var concursos = Array()
   const [dezenas, setDezenas] = useState([])
   const [premiacao, setpremiacao] = useState()
   const [showLoading, setShowLoading] = useState(true);
@@ -39,7 +37,7 @@ const ConcursoQuina: React.FC<MegaDetails> = ({ match }) => {
      
       //console.log(prev);
       
-    }, [])
+    }, [match.params.id])
   const sendGetRequest = async (concursos:string) => {
     console.log(concursos)
     const response = await axios.get(`https://ganheinaloteria.herokuapp.com/api/quina/${concursos}`);
@@ -97,7 +95,7 @@ const ConcursoQuina: React.FC<MegaDetails> = ({ match }) => {
             }
             {
               
-              concurso != 1 ?
+              concurso !== 1 ?
                 <IonButton href={prev}>Anterior</IonButton>  :
 
                 <IonButton disabled>Anterior</IonButton>

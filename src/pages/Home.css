@@ -31,6 +31,17 @@ text-align: center;
 .btnInicio {
   margin-left: 0;
 }
-.loterias {
-  margin-bottom: 10px;
+
+.tituloMega {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0 90px 1px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.cardImage {
+  max-height: 236px;
+  max-width: 236px;
 }

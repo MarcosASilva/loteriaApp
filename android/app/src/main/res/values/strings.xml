@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">loteriaApp</string>
-    <string name="title_activity_main">loteriaApp</string>
-    <string name="package_name">io.ionic.starter</string>
-    <string name="custom_url_scheme">io.ionic.starter</string>
+    <string name="app_name">Resultado Loterias</string>
+    <string name="title_activity_main">Resultado Loterias</string>
+    <string name="package_name">com.marcos.appLoterias</string>
+    <string name="custom_url_scheme">com.marcos.appLoterias</string>
 </resources>

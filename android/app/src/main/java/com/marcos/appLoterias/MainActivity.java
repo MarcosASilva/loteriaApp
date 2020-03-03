@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package com.marcos.appLoterias;
 
 import android.os.Bundle;
 

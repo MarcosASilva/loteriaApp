@@ -1,6 +1,9 @@
 import React from 'react'
-import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonList, IonItem, IonLabel } from '@ionic/react'
+import { IonHeader, IonToolbar, IonTitle, IonContent, IonPage, IonList, IonItem, IonLabel, IonCard, IonCardTitle, IonCardHeader, IonCardContent } from '@ionic/react'
 import './Home.css'
+import megasenaImg from '../assets/megasena.png'
+import quinaImg from '../assets/quina.png'
+import lotomaniaImg from '../assets/lotomania.jpg'
 
 
 
@@ -8,17 +11,21 @@ const Inicio: React.FC = () => {
     var loterias = [
         {
             "nome": 'Mega Sena',
-            'url': 'megasena'
+            'url': 'megasena',
+            'imageUrl': megasenaImg
+            
         },
 
         {
             "nome": 'Quina',
-            'url': 'quina'
+            'url': 'quina',          
+            'imageUrl': quinaImg
         },
 
         {
             "nome": 'LotoMania',
-            'url': 'lotomania'
+            'url': 'lotomania',
+            'imageUrl': lotomaniaImg
         }
     ]
     return (
@@ -26,25 +33,30 @@ const Inicio: React.FC = () => {
             <IonHeader>
                 <IonToolbar>
                     <IonHeader>
-                        <IonTitle>Loteria</IonTitle>
+                        <IonTitle className="titulo">Loteria</IonTitle>
                     </IonHeader>
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <IonList>
+               
                     {
-                        loterias.map(l => {
+                        loterias.map((l,key) => {
                             return(
                                 
-                                <IonItem href={l.url} className="loterias">
-                                    <IonLabel> {l.nome} </IonLabel>
-                                </IonItem>
+                                <IonCard href={l.url} key={key}>
+                                    <IonCardHeader>
+                                    <img src={l.imageUrl} className="cardImage" alt='' />
+                                   
+                                    </IonCardHeader>
+                           <IonCardContent>
+                           <IonCardTitle> {l.nome} </IonCardTitle>
+                           </IonCardContent>
+                                </IonCard>
                                 
                             )
 
                         })
                     }
-                </IonList>
 
             </IonContent>    
         </IonPage>

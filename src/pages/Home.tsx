@@ -14,16 +14,13 @@ import {
   IonBackButton
 } from "@ionic/react";
 import React, { useState,useEffect } from "react";
-import ExploreContainer from "../components/ExploreContainer";
 import "./Home.css";
 import axios from "axios";
 import api from '../services/api'
 import { RefresherEventDetail } from '@ionic/core';
 
 const Home: React.FC = () => {
-  const [number, setNumber] = useState(0);
   const [jogo,setJogo] = useState();  
-  const [jogo2,setJogo2] = useState([]);
   const [concurso,setConcurso] = useState();
   const [acumulado,setAcumulado] = useState();
   const[ dataConcurso, setDataConcurso] = useState();
@@ -76,21 +73,13 @@ const Home: React.FC = () => {
       setDados(true)
       setShowLoading(false)
       
-      salvarConcursos()
     })
       
     
 
   }, []);
 
-  const click = () => {
- 
- 
- //console.log(dezenas);
 
-    setNumber(number + 1);
-    console.log(concursos);
-  };
 
   return (
     <IonPage>
@@ -99,18 +88,15 @@ const Home: React.FC = () => {
           <IonButton slot="start" fill='clear'>
             <IonBackButton defaultHref="/" />
           </IonButton>
-        <IonTitle>
+  
+        <IonTitle className="tituloMega">
           
         {jogo}
         </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent className="conteudo">
-        <IonHeader collapse="condense">
-          <IonToolbar>
 
-          </IonToolbar>
-        </IonHeader>
         <IonRefresher slot="fixed" onIonRefresh={doRefresh}>
           <IonRefresherContent></IonRefresherContent>
         </IonRefresher>
